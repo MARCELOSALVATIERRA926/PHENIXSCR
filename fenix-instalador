@@ -1,35 +1,46 @@
-#!/bin/bash
-# ==============================================
-#    FENIX-SCR — INSTALADOR INTERNO
-#        Fenix 3815569765
-# ==============================================
+rm -f fenix-instalador
 
+cat > fenix-instalador << 'FIN'
+#!/bin/bash
 set -e
+
+# === COLORES ===
+N="\033[0m"     # Normal
+B="\033[1;37m" # Blanco
+A="\033[1;33m" # Amarillo
+V="\033[1;32m" # Verde
+R="\033[1;31m" # Rojo
+C="\033[1;36m" # Cian
+Az="\033[1;34m"# Azul
+
 clear
 
 echo -e "
-════════════════════════════════════════════════════════
-   FENIX-SCR — ACTUALIZANDO UBUNTU
-   Fenix 3815569765
-════════════════════════════════════════════════════════
+${C}════════════════════════════════════════════════════════${N}
+   ${B}FENIX-SCR — ACTUALIZANDO UBUNTU${N}
+   ${A}Fenix 3815569765${N}
+${C}════════════════════════════════════════════════════════${N}
 "
-
 apt update -y
 apt full-upgrade -y
 apt autoremove -y
 
 echo -e "
-════════════════════════════════════════════════════════
-               INSTALANDO DEPENDENCIAS
-════════════════════════════════════════════════════════
+${C}════════════════════════════════════════════════════════${N}
+               ${B}INSTALANDO DEPENDENCIAS${N}
+${C}════════════════════════════════════════════════════════${N}
 "
 
 instalar() {
-  echo -n "      instalando $1 .................."
+  printf "      ${B}instalando ${A}%-18s${N}" "$1"
+  for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
+    printf "."
+    sleep 0.05
+  done
   if apt install -y "$1" &>/dev/null; then
-    echo "INSTALL"
+    echo -e " ${V}INSTALL${N}"
   else
-    echo "INSTALL"
+    echo -e " ${Az}YA INSTALADO${N}"
   fi
 }
 
@@ -54,7 +65,6 @@ instalar gawk
 instalar grep
 instalar bc
 instalar jq
-instalar curl
 instalar npm
 instalar nodejs
 instalar socat
@@ -68,16 +78,22 @@ instalar sqlite3
 instalar libsqlite3-dev
 instalar locales
 
-echo -n "      instalando hcrm ..............."
+printf "      ${B}instalando ${A}hcrm${N}"
+for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do printf "."; sleep 0.05; done
 cat > /usr/local/bin/hcrm << 'EOF'
 #!/bin/bash
 echo "HCRM — PHENIX-TUC"
 EOF
 chmod +x /usr/local/bin/hcrm
-echo "INSTALL"
+echo -e " ${V}INSTALL${N}"
 
-echo -n "      instalando menu ..............."
+printf "      ${B}preparando ${A}carpetas${N}"
+for i in 1 2 3 4 5 6 7 8 9 10; do printf "."; sleep 0.05; done
 mkdir -p /etc/FENIX-SCR/bd /etc/FENIX-SCR/modulos /var/log/fenix-scr
+echo -e " ${V}LISTO${N}"
+
+printf "      ${B}creando ${A}base de datos${N}"
+for i in 1 2 3 4 5 6 7 8 9 10; do printf "."; sleep 0.05; done
 BD="/etc/FENIX-SCR/bd/usuarios.db"
 sqlite3 "$BD" "CREATE TABLE IF NOT EXISTS usuarios (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -88,17 +104,24 @@ sqlite3 "$BD" "CREATE TABLE IF NOT EXISTS usuarios (
   hwid TEXT,
   token TEXT
 );"
+echo -e " ${V}LISTO${N}"
+
+printf "      ${B}instalando ${A}menú${N}"
+for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do printf "."; sleep 0.05; done
 wget -q -O /usr/bin/fenix "https://raw.githubusercontent.com/MARCELOSALVATIERRA926/PHENIXSCR/main/menu.sh"
 chmod +x /usr/bin/fenix
 ln -sf /usr/bin/fenix /usr/local/bin/menu
-echo "INSTALL"
+echo -e " ${V}INSTALL${N}"
 
 echo -e "
-════════════════════════════════════════════════════════
-   ✅ TODAS LAS DEPENDENCIAS INSTALADAS
-════════════════════════════════════════════════════════
-        PHENIX : Fenix 3815569765
-════════════════════════════════════════════════════════
+${C}════════════════════════════════════════════════════════${N}
+   ${V}✅ INSTALACIÓN TERMINADA — TODO HECHO${N}
+${C}════════════════════════════════════════════════════════${N}
+        ${A}PHENIX : Fenix 3815569765${N}
+${C}════════════════════════════════════════════════════════${N}
 "
-
 exec /usr/bin/fenix
+FIN
+
+chmod +x fenix-instalador
+./fenix-instalador
