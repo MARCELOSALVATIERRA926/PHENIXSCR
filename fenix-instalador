@@ -50,16 +50,16 @@ ${C}═════════════════════════�
   ${V}DROPBEAR:${N} 90                  ${V}PYTHON3:${N} 80
   ${V}SSH:${N} 22
 ${C}════════════════════════════════════════════════════════════${N}
-  ${A}[1]${N}> AJUSTES SSH       $(estado $SSH_ON)        ${A}[10]${N}> SQUID             $(estado $SQUID_ON)
-  ${A}[2]${N}> DROPBEAR          $(estado $DROPBEAR_ON)        ${A}[11]${N}> OPENVPN           $(estado $OPENVPN_ON)
-  ${A}[3]${N}> SOCKS PYTHON      $(estado $SOCKS_ON)        ${A}[12]${N}> CHECKUSER ONLINE  $(estado $CHECKUSER_ON)
-  ${A}[4]${N}> STUNNEL (SSL)     $(estado $STUNNEL_ON)       ${A}[13]${N}> ATKEN and HASH    $(estado $ATKEN_ON)
-  ${A}[5]${N}> SLOWDNS           $(estado $SLOWDNS_ON)       ${A}[14]${N}> FILEBROWSER       $(estado $FILEBROWSER_ON)
-  ${A}[6]${N}> WS-EPRO           $(estado $WSEPRO_ON)        ${A}[15]${N}> V2RAY/XRAY        $(estado $V2RAY_ON)
-  ${A}[7]${N}> UDP-CUSTOM        $(estado $UDP_CUSTOM_ON)     ${A}[16]${N}> SSHGO             $(estado $SSHGO_ON)
-  ${A}[8]${N}> UDP-HYSTERIA      $(estado $UDP_HYSTERIA_ON)   ${A}[17]${N}> WIREGUARD         $(estado $WIREGUARD_ON)
-  ${A}[9]${N}> BADVPN-UDPGW      $(estado $BADVPN_ON)
- ${A}[18]${N}> HCRM              $(estado $HCRM_ON)
+  ${A}[1]${N}> AJUSTES SSH     $(estado $SSH_ON)          ${A}[10]${N}> SQUID             $(estado $SQUID_ON)
+  ${A}[2]${N}> DROPBEAR        $(estado $DROPBEAR_ON)     ${A}[11]${N}> OPENVPN           $(estado $OPENVPN_ON)
+  ${A}[3]${N}> SOCKS PYTHON    $(estado $SOCKS_ON)        ${A}[12]${N}> CHECKUSER ONLINE  $(estado $CHECKUSER_ON)
+  ${A}[4]${N}> STUNNEL (SSL)   $(estado $STUNNEL_ON)      ${A}[13]${N}> ATKEN and HASH    $(estado $ATKEN_ON)
+  ${A}[5]${N}> SLOWDNS         $(estado $SLOWDNS_ON)      ${A}[14]${N}> FILEBROWSER       $(estado $FILEBROWSER_ON)
+  ${A}[6]${N}> WS-EPRO         $(estado $WSEPRO_ON)       ${A}[15]${N}> V2RAY/XRAY        $(estado $V2RAY_ON)
+  ${A}[7]${N}> UDP-CUSTOM      $(estado $UDP_CUSTOM_ON)   ${A}[16]${N}> SSHGO             $(estado $SSHGO_ON)
+  ${A}[8]${N}> UDP-HYSTERIA    $(estado $UDP_HYSTERIA_ON) ${A}[17]${N}> WIREGUARD         $(estado $WIREGUARD_ON)
+  ${A}[9]${N}> BADVPN-UDPGW    $(estado $BADVPN_ON)       ${A}[18]${N}> HCRM              $(estado $HCRM_ON)
+                                                              
 ${C}════════════════════════════════════════════════════════════${N}
   ${V}[0]${N} Volver al menú
 ${C}════════════════════════════════════════════════════════════${N}
