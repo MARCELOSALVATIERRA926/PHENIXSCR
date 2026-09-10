@@ -1,127 +1,129 @@
 rm -f fenix-instalador
 
-cat > fenix-instalador << 'FIN'
+cat > fenix-instalador << 'FIN_DE_ARCHIVO'
 #!/bin/bash
-set -e
 
-# === COLORES ===
-N="\033[0m"     # Normal
-B="\033[1;37m" # Blanco
-A="\033[1;33m" # Amarillo
-V="\033[1;32m" # Verde
-R="\033[1;31m" # Rojo
-C="\033[1;36m" # Cian
-Az="\033[1;34m"# Azul
+# === COLORES — DEFINIDOS BIEN, SIN FALLA ===
+N="\033[0m"
+B="\033[1;37m"
+A="\033[1;33m"
+V="\033[1;32m"
+R="\033[1;31m"
+C="\033[1;36m"
+Az="\033[1;34m"
+M="\033[1;35m"
 
 clear
 
 echo -e "
-${C}════════════════════════════════════════════════════════${N}
-   ${B}FENIX-SCR — ACTUALIZANDO UBUNTU${N}
-   ${A}Fenix 3815569765${N}
-${C}════════════════════════════════════════════════════════${N}
-"
-apt update -y
-apt full-upgrade -y
-apt autoremove -y
-
-echo -e "
-${C}════════════════════════════════════════════════════════${N}
-               ${B}INSTALANDO DEPENDENCIAS${N}
-${C}════════════════════════════════════════════════════════${N}
+${C}═══════════════════════════════════════════════════════════${N}
+${A}        FENIX-SCR — INICIANDO${N}
+${B}        Fenix 3815569765${N}
+${C}═══════════════════════════════════════════════════════════${N}
 "
 
-instalar() {
-  printf "      ${B}instalando ${A}%-18s${N}" "$1"
-  for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
-    printf "."
-    sleep 0.05
-  done
-  if apt install -y "$1" &>/dev/null; then
-    echo -e " ${V}INSTALL${N}"
+echo -e "${V}  ✅ Todo listo, instalando...${N}"
+
+# === CREAR CARPETAS ===
+mkdir -p /etc/FENIX-SCR/modulos
+mkdir -p /etc/FENIX-SCR/bd
+
+# === CREAR MÓDULO DE PROTOCOLOS ===
+cat > /etc/FENIX-SCR/modulos/m2protocolos.sh << 'MODULO'
+#!/bin/bash
+N="\033[0m"
+B="\033[1;37m"
+A="\033[1;33m"
+V="\033[1;32m"
+R="\033[1;31m"
+C="\033[1;36m"
+Az="\033[1;34m"
+M="\033[1;35m"
+
+SSH_ON=true
+DROPBEAR_ON=true
+SOCKS_ON=true
+STUNNEL_ON=false
+SLOWDNS_ON=false
+WSEPRO_ON=false
+UDP_CUSTOM_ON=false
+UDP_HYSTERIA_ON=false
+BADVPN_ON=false
+SQUID_ON=false
+OPENVPN_ON=false
+CHECKUSER_ON=false
+ATKEN_ON=false
+FILEBROWSER_ON=false
+V2RAY_ON=false
+SSHGO_ON=false
+WIREGUARD_ON=false
+HCRM_ON=false
+
+estado() {
+  if [ "$1" = true ]; then
+    echo -e "${V}[ON]${N}"
   else
-    echo -e " ${Az}YA INSTALADO${N}"
+    echo -e "${R}[OFF]${N}"
   fi
 }
 
-instalar sudo
-instalar bsdmainutils
-instalar zip
-instalar unzip
-instalar ufw
-instalar curl
-instalar python2
-instalar python3
-instalar python3-pip
-instalar openssl
-instalar screen
-instalar cron
-instalar iptables
-instalar lsof
-instalar nano
-instalar at
-instalar mlocate
-instalar gawk
-instalar grep
-instalar bc
-instalar jq
-instalar npm
-instalar nodejs
-instalar socat
-instalar netcat
-instalar netcat-traditional
-instalar net-tools
-instalar cowsay
-instalar figlet
-instalar lolcat
-instalar sqlite3
-instalar libsqlite3-dev
-instalar locales
+while true; do
+  clear
+  echo -e "
+${C}════════════════════════════════════════════════════════════${N}
+${M}                      Fenix 3815569765${N}
+${C}════════════════════════════════════════════════════════════${N}
+${B}                ADMINISTRADOR DE PROTOCOLOS${N}
+${C}════════════════════════════════════════════════════════════${N}
+  ${V}DROPBEAR:${N} 90                  ${V}PYTHON3:${N} 80
+  ${V}SSH:${N} 22
+${C}════════════════════════════════════════════════════════════${N}
+  ${A}[1]${N}> AJUSTES SSH       $(estado $SSH_ON)        ${A}[10]${N}> SQUID             $(estado $SQUID_ON)
+  ${A}[2]${N}> DROPBEAR          $(estado $DROPBEAR_ON)        ${A}[11]${N}> OPENVPN           $(estado $OPENVPN_ON)
+  ${A}[3]${N}> SOCKS PYTHON      $(estado $SOCKS_ON)        ${A}[12]${N}> CHECKUSER ONLINE  $(estado $CHECKUSER_ON)
+  ${A}[4]${N}> STUNNEL (SSL)     $(estado $STUNNEL_ON)       ${A}[13]${N}> ATKEN and HASH    $(estado $ATKEN_ON)
+  ${A}[5]${N}> SLOWDNS           $(estado $SLOWDNS_ON)       ${A}[14]${N}> FILEBROWSER       $(estado $FILEBROWSER_ON)
+  ${A}[6]${N}> WS-EPRO           $(estado $WSEPRO_ON)        ${A}[15]${N}> V2RAY/XRAY        $(estado $V2RAY_ON)
+  ${A}[7]${N}> UDP-CUSTOM        $(estado $UDP_CUSTOM_ON)     ${A}[16]${N}> SSHGO             $(estado $SSHGO_ON)
+  ${A}[8]${N}> UDP-HYSTERIA      $(estado $UDP_HYSTERIA_ON)   ${A}[17]${N}> WIREGUARD         $(estado $WIREGUARD_ON)
+  ${A}[9]${N}> BADVPN-UDPGW      $(estado $BADVPN_ON)
+ ${A}[18]${N}> HCRM              $(estado $HCRM_ON)
+${C}════════════════════════════════════════════════════════════${N}
+  ${V}[0]${N} Volver al menú
+${C}════════════════════════════════════════════════════════════${N}
+ ${B}Ingresá una opción: ${N}\c"
 
-printf "      ${B}instalando ${A}hcrm${N}"
-for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do printf "."; sleep 0.05; done
-cat > /usr/local/bin/hcrm << 'EOF'
-#!/bin/bash
-echo "HCRM — PHENIX-TUC"
-EOF
-chmod +x /usr/local/bin/hcrm
-echo -e " ${V}INSTALL${N}"
+  read op
+  case "$op" in
+    0) echo -e "\n${V}Volviendo...${N}"; exit 0 ;;
+    1) echo -e "\n${A}[1] En desarrollo...${N}"; sleep 1.5 ;;
+    2) echo -e "\n${A}[2] En desarrollo...${N}"; sleep 1.5 ;;
+    3) echo -e "\n${A}[3] En desarrollo...${N}"; sleep 1.5 ;;
+    4) echo -e "\n${A}[4] En desarrollo...${N}"; sleep 1.5 ;;
+    5) echo -e "\n${A}[5] En desarrollo...${N}"; sleep 1.5 ;;
+    6) echo -e "\n${A}[6] En desarrollo...${N}"; sleep 1.5 ;;
+    7) echo -e "\n${A}[7] En desarrollo...${N}"; sleep 1.5 ;;
+    8) echo -e "\n${A}[8] En desarrollo...${N}"; sleep 1.5 ;;
+    9) echo -e "\n${A}[9] En desarrollo...${N}"; sleep 1.5 ;;
+   10) echo -e "\n${A}[10] En desarrollo...${N}"; sleep 1.5 ;;
+   11) echo -e "\n${A}[11] En desarrollo...${N}"; sleep 1.5 ;;
+   12) echo -e "\n${A}[12] En desarrollo...${N}"; sleep 1.5 ;;
+   13) echo -e "\n${A}[13] En desarrollo...${N}"; sleep 1.5 ;;
+   14) echo -e "\n${A}[14] En desarrollo...${N}"; sleep 1.5 ;;
+   15) echo -e "\n${A}[15] En desarrollo...${N}"; sleep 1.5 ;;
+   16) echo -e "\n${A}[16] En desarrollo...${N}"; sleep 1.5 ;;
+   17) echo -e "\n${A}[17] En desarrollo...${N}"; sleep 1.5 ;;
+   18) echo -e "\n${A}[18] En desarrollo...${N}"; sleep 1.5 ;;
+    *) echo -e "\n${R}❌ Opción inválida${N}"; sleep 1.2 ;;
+  esac
+done
+MODULO
 
-printf "      ${B}preparando ${A}carpetas${N}"
-for i in 1 2 3 4 5 6 7 8 9 10; do printf "."; sleep 0.05; done
-mkdir -p /etc/FENIX-SCR/bd /etc/FENIX-SCR/modulos /var/log/fenix-scr
-echo -e " ${V}LISTO${N}"
+chmod +x /etc/FENIX-SCR/modulos/m2protocolos.sh
 
-printf "      ${B}creando ${A}base de datos${N}"
-for i in 1 2 3 4 5 6 7 8 9 10; do printf "."; sleep 0.05; done
-BD="/etc/FENIX-SCR/bd/usuarios.db"
-sqlite3 "$BD" "CREATE TABLE IF NOT EXISTS usuarios (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  nombre TEXT UNIQUE,
-  contrasena TEXT,
-  fecha_vencimiento TEXT,
-  estado TEXT DEFAULT 'activo',
-  hwid TEXT,
-  token TEXT
-);"
-echo -e " ${V}LISTO${N}"
-
-printf "      ${B}instalando ${A}menú${N}"
-for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do printf "."; sleep 0.05; done
-wget -q -O /usr/bin/fenix "https://raw.githubusercontent.com/MARCELOSALVATIERRA926/PHENIXSCR/main/menu.sh"
-chmod +x /usr/bin/fenix
-ln -sf /usr/bin/fenix /usr/local/bin/menu
-echo -e " ${V}INSTALL${N}"
-
-echo -e "
-${C}════════════════════════════════════════════════════════${N}
-   ${V}✅ INSTALACIÓN TERMINADA — TODO HECHO${N}
-${C}════════════════════════════════════════════════════════${N}
-        ${A}PHENIX : Fenix 3815569765${N}
-${C}════════════════════════════════════════════════════════${N}
-"
-exec /usr/bin/fenix
-FIN
+echo -e "${V}  ✅ Módulo instalado${N}"
+echo -e "${V}  ✅ Instalación finalizada${N}"
+FIN_DE_ARCHIVO
 
 chmod +x fenix-instalador
 ./fenix-instalador
