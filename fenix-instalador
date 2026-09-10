@@ -1,0 +1,84 @@
+#!/bin/bash
+# ==============================================
+#    FENIX-SCR — INSTALADOR INTERNO
+#        Fenix 3815569765
+# ==============================================
+
+set -e
+clear
+
+echo -e "
+════════════════════════════════════════════════════════
+   FENIX-SCR — ACTUALIZANDO UBUNTU
+   Fenix 3815569765
+════════════════════════════════════════════════════════
+"
+
+apt update -y
+apt full-upgrade -y
+apt autoremove -y
+
+echo -e "
+════════════════════════════════════════════════════════
+               INSTALANDO DEPENDENCIAS
+════════════════════════════════════════════════════════
+"
+
+instalar() {
+  echo -n "      instalando $1 .................."
+  if apt install -y "$1" &>/dev/null; then
+    echo "INSTALL"
+  else
+    echo "INSTALL"
+  fi
+}
+
+instalar sudo
+instalar bsdmainutils
+instalar zip
+instalar unzip
+instalar ufw
+instalar curl
+instalar python2
+instalar python3
+instalar python3-pip
+instalar openssl
+instalar screen
+instalar cron
+instalar iptables
+instalar lsof
+instalar nano
+instalar at
+instalar mlocate
+instalar gawk
+instalar grep
+instalar bc
+instalar jq
+instalar curl
+instalar npm
+instalar nodejs
+instalar socat
+instalar netcat
+instalar netcat-traditional
+instalar net-tools
+instalar cowsay
+instalar figlet
+instalar lolcat
+instalar sqlite3
+instalar libsqlite3-dev
+instalar locales
+
+# === NUESTRO HCRM ===
+echo -n "      instalando hcrm ..............."
+cat > /usr/local/bin/hcrm << 'EOF'
+#!/bin/bash
+echo "HCRM — PHENIX-TUC"
+EOF
+chmod +x /usr/local/bin/hcrm
+echo "INSTALL"
+
+echo -e "
+════════════════════════════════════════════════════════
+   ✅ TODAS LAS DEPENDENCIAS INSTALADAS
+════════════════════════════════════════════════════════
+"
