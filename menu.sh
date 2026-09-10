@@ -5,14 +5,14 @@
 # ==============================================
 
 # === COLORES ===
-N="\033[0m"      # Normal
-B="\033[1;37m"  # Blanco brillante
-A="\033[1;33m"  # Amarillo / Dorado
-V="\033[1;32m"  # Verde
-R="\033[1;31m"  # Rojo
-C="\033[1;36m"  # Cian / Turquesa
-Az="\033[1;34m" # Azul
-M="\033[1;35m"  # Magenta / Rosa
+N="\033[0m"
+B="\033[1;37m"
+A="\033[1;33m"
+V="\033[1;32m"
+R="\033[1;31m"
+C="\033[1;36m"
+Az="\033[1;34m"
+M="\033[1;35m"
 
 while true; do
   clear
@@ -22,23 +22,19 @@ while true; do
   IP=$(hostname -I | awk '{print $1}')
   SISTEMA=$(lsb_release -d | cut -f2)
 
-  # Espacio en disco
   DISCO_TOTAL=$(df -BG / | awk 'NR==2 {print $2}' | tr -d 'G')
   DISCO_USO=$(df -BG / | awk 'NR==2 {print $3}' | tr -d 'G')
   DISCO_LIBRE=$(df -BG / | awk 'NR==2 {print $4}' | tr -d 'G')
 
-  # RAM
   RAM_TOTAL=$(free -m | awk 'NR==2 {print $2}')
   RAM_USO=$(free -m | awk 'NR==2 {print $3}')
   RAM_LIBRE=$(free -m | awk 'NR==2 {print $4}')
   BUFFER=$(free -m | awk 'NR==2 {print $6}')
   CACHE=$(free -m | awk 'NR==2 {print $7}')
 
-  # CPU
   CPU_USO=$(top -bn1 | grep 'Cpu(s)' | awk '{print 100 - $8}' | cut -d. -f1)
   NUCLEOS=$(nproc)
 
-  # Contadores
   BD="/etc/FENIX-SCR/bd/usuarios.db"
   if [ -f "$BD" ]; then
     ACTIVA=$(sqlite3 "$BD" "SELECT COUNT(*) FROM usuarios WHERE estado='activo';" 2>/dev/null || echo "0")
@@ -92,7 +88,7 @@ ${C}═════════════════════════�
   case "$opcion" in
     0) echo -e "\n${V}Saliendo... ¡Hasta la próxima! ✅${N}"; exit 0 ;;
     1) echo -e "\n${A}Opción [1] — ${B}ADMINISTRAR CUENTAS${N}\n${M}En desarrollo...${N}"; sleep 2 ;;
-    2) echo -e "\n${A}Opción [2] — ${B}CONFIGURACIÓN DE PROTOCOLOS${N}\n${V}Lista para configurar puertos y túneles ✅${N}"; sleep 2 ;;
+    2) /etc/FENIX-SCR/modulos/m2protocolos.sh ;;
     3) echo -e "\n${A}Opción [3] — ${B}HERRAMIENTAS EXTRAS${N}\n${M}En desarrollo...${N}"; sleep 2 ;;
     4) echo -e "\n${A}Opción [4] — ${B}FUNCIONES ESPECIALES${N}\n${M}En desarrollo...${N}"; sleep 2 ;;
     5) echo -e "\n${A}Opción [5] — ${B}CONFIGURACIÓN DEL SCRIPT${N}\n${M}En desarrollo...${N}"; sleep 2 ;;
