@@ -68,7 +68,6 @@ instalar sqlite3
 instalar libsqlite3-dev
 instalar locales
 
-# === NUESTRO HCRM ===
 echo -n "      instalando hcrm ..............."
 cat > /usr/local/bin/hcrm << 'EOF'
 #!/bin/bash
@@ -77,8 +76,29 @@ EOF
 chmod +x /usr/local/bin/hcrm
 echo "INSTALL"
 
+echo -n "      instalando menu ..............."
+mkdir -p /etc/FENIX-SCR/bd /etc/FENIX-SCR/modulos /var/log/fenix-scr
+BD="/etc/FENIX-SCR/bd/usuarios.db"
+sqlite3 "$BD" "CREATE TABLE IF NOT EXISTS usuarios (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nombre TEXT UNIQUE,
+  contrasena TEXT,
+  fecha_vencimiento TEXT,
+  estado TEXT DEFAULT 'activo',
+  hwid TEXT,
+  token TEXT
+);"
+wget -q -O /usr/bin/fenix "https://raw.githubusercontent.com/MARCELOSALVATIERRA926/PHENIXSCR/main/menu.sh"
+chmod +x /usr/bin/fenix
+ln -sf /usr/bin/fenix /usr/local/bin/menu
+echo "INSTALL"
+
 echo -e "
 ════════════════════════════════════════════════════════
    ✅ TODAS LAS DEPENDENCIAS INSTALADAS
 ════════════════════════════════════════════════════════
+        PHENIX : Fenix 3815569765
+════════════════════════════════════════════════════════
 "
+
+exec /usr/bin/fenix
