@@ -4,6 +4,16 @@
 #             Fenix 3815569765
 # ==============================================
 
+# === COLORES ===
+N="\033[0m"      # Normal
+B="\033[1;37m"  # Blanco brillante
+A="\033[1;33m"  # Amarillo / Dorado
+V="\033[1;32m"  # Verde
+R="\033[1;31m"  # Rojo
+C="\033[1;36m"  # Cian / Turquesa
+Az="\033[1;34m" # Azul
+M="\033[1;35m"  # Magenta / Rosa
+
 while true; do
   clear
 
@@ -28,7 +38,7 @@ while true; do
   CPU_USO=$(top -bn1 | grep 'Cpu(s)' | awk '{print 100 - $8}' | cut -d. -f1)
   NUCLEOS=$(nproc)
 
-  # Contadores de usuarios
+  # Contadores
   BD="/etc/FENIX-SCR/bd/usuarios.db"
   if [ -f "$BD" ]; then
     ACTIVA=$(sqlite3 "$BD" "SELECT COUNT(*) FROM usuarios WHERE estado='activo';" 2>/dev/null || echo "0")
@@ -40,56 +50,56 @@ while true; do
   fi
 
   echo -e "
-  ██████╗ ██╗  ██╗███████╗███╗   ██╗██╗██╗  ██╗
-  ██╔══██╗██║  ██║██╔════╝████╗  ██║██║╚██╗██╔╝
-  ██████╔╝███████║█████╗  ██╔██╗ ██║██║ ╚███╔╝ 
-  ██╔═══╝ ██╔══██║██╔══╝  ██║╚██╗██║██║ ██╔██╗ 
-  ██║     ██║  ██║███████╗██║ ╚████║██║██╔╝ ██╗
-  ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝
-        PHENIX : Fenix 3815569765
+${A}  ██████╗ ██╗  ██╗███████╗███╗   ██╗██╗██╗  ██╗${N}
+${A}  ██╔══██╗██║  ██║██╔════╝████╗  ██║██║╚██╗██╔╝${N}
+${A}  ██████╔╝███████║█████╗  ██╔██╗ ██║██║ ╚███╔╝ ${N}
+${A}  ██╔═══╝ ██╔══██║██╔══╝  ██║╚██╗██║██║ ██╔██╗ ${N}
+${A}  ██║     ██║  ██║███████╗██║ ╚████║██║██╔╝ ██╗${N}
+${A}  ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝${N}
+${M}        PHENIX : ${B}Fenix 3815569765${N}
 "
 
-  echo -e "         Fenix 3815569765
- ╔══════════════════════════════════════════════════════════╗
-  S.O:    $SISTEMA           Fecha:  $FECHA
-  IP:     $IP                 Hora:   $HORA
-╠═════════════════Disc═════════════════╦════════CPU════════╣
-  Total:  ${DISCO_TOTAL}GB    Dispo:  ${DISCO_LIBRE}GB     Cores:  $NUCLEOS
-  En Uso: ${DISCO_USO}GB     Libre:  ${DISCO_LIBRE}GB     En Uso: ${CPU_USO}%
-╠═══════════════════════════ram════════╩═══════════════════╣
-  Total:  ${RAM_TOTAL}MB     En Uso: ${RAM_USO}MB    Libre:  ${RAM_LIBRE}MB
-  Buffer: ${BUFFER}MB   Cache:  ${CACHE}MB
-╚══════════════════════════════════════════════════════════╝
-    ACTIVA: $ACTIVA   EXPIRADA: $EXPIRADA   BLOQUEADA: $BLOQUEADA   TOTAL: $TOTAL
-════════════════════════════════════════════════════════════
-  [1]> ADMINISTRAR CUENTAS (SSH/DROPBEAR)
-------------------------------------------------------------
-  [2]> CONFIGURACION DE PROTOCOLOS
-  [3]> HERRAMIENTAS EXTRAS
-------------------------------------------------------------
-  [4]> FUNCIONES ESPECIALES
-------------------------------------------------------------
-  [5]> CONFIGURACION DEL SCRIPT
-  [6]> ACTUALIZACIONES DISPONIBLES
-------------------------------------------------------------
-  [7]> [!] DESINSTALAR PANEL
-════════════════════════════════════════════════════════════
-  [0] SALIR DEL SCRIPT   [8] SALIR DEL VPS   [9] REINICIAR VPS
-════════════════════════════════════════════════════════════
- Ingresa una Opcion: \c"
+  echo -e "         ${B}Fenix 3815569765${N}
+${C}╔══════════════════════════════════════════════════════════╗${N}
+  ${V}S.O:${N}    ${B}$SISTEMA${N}           ${V}Fecha:${N}  ${A}$FECHA${N}
+  ${V}IP:${N}     ${B}$IP${N}                 ${V}Hora:${N}   ${A}$HORA${N}
+${C}╠═════════════════${M}DISCO${C}═════════════════╦════${M}CPU${C}════════╣${N}
+  ${V}Total:${N}  ${B}${DISCO_TOTAL}GB${N}    ${V}Libre:${N}  ${V}${DISCO_LIBRE}GB${N}     ${V}Núcleos:${N}  ${A}$NUCLEOS${N}
+  ${V}En Uso:${N} ${R}${DISCO_USO}GB${N}     ${V}Dispo:${N}  ${V}${DISCO_LIBRE}GB${N}     ${V}En Uso:${N} ${R}${CPU_USO}%${N}
+${C}╠════════════════════════${M}MEMORIA RAM${C}════════╩═══════════════════╣${N}
+  ${V}Total:${N}  ${B}${RAM_TOTAL}MB${N}     ${V}En Uso:${N} ${R}${RAM_USO}MB${N}    ${V}Libre:${N}  ${V}${RAM_LIBRE}MB${N}
+  ${V}Buffer:${N} ${Az}${BUFFER}MB${N}   ${V}Caché:${N}  ${Az}${CACHE}MB${N}
+${C}╚══════════════════════════════════════════════════════════╝${N}
+    ${V}ACTIVAS:${N} ${B}$ACTIVA${N}   ${A}EXPIRADAS:${N} ${A}$EXPIRADA${N}   ${R}BLOQUEADAS:${N} ${R}$BLOQUEADA${N}   ${M}TOTAL:${N} ${B}$TOTAL${N}
+${C}════════════════════════════════════════════════════════════${N}
+  ${A}[1]${N} ${V}ADMINISTRAR CUENTAS (SSH/DROPBEAR)${N}
+${C}------------------------------------------------------------${N}
+  ${A}[2]${N} ${V}CONFIGURACIÓN DE PROTOCOLOS${N}
+  ${A}[3]${N} ${V}HERRAMIENTAS EXTRAS${N}
+${C}------------------------------------------------------------${N}
+  ${A}[4]${N} ${V}FUNCIONES ESPECIALES${N}
+${C}------------------------------------------------------------${N}
+  ${A}[5]${N} ${V}CONFIGURACIÓN DEL SCRIPT${N}
+  ${A}[6]${N} ${V}ACTUALIZACIONES DISPONIBLES${N}
+${C}------------------------------------------------------------${N}
+  ${R}[7]${N} ${R}⚠️  DESINSTALAR PANEL${N}
+${C}════════════════════════════════════════════════════════════${N}
+  ${V}[0]${N} ${B}SALIR DEL SCRIPT${N}   ${Az}[8]${N} ${B}SALIR DE LA VPS${N}   ${R}[9]${N} ${R}REINICIAR VPS${N}
+${C}════════════════════════════════════════════════════════════${N}
+ ${B}Ingresá una opción: ${N}\c"
 
   read opcion
   case "$opcion" in
-    0) echo -e "\nSaliendo..."; exit 0 ;;
-    1) echo -e "\nOpción [1] — ADMINISTRAR CUENTAS\nEn desarrollo..."; sleep 2 ;;
-    2) echo -e "\nOpción [2] — CONFIGURACION DE PROTOCOLOS\nEn desarrollo..."; sleep 2 ;;
-    3) echo -e "\nOpción [3] — HERRAMIENTAS EXTRAS\nEn desarrollo..."; sleep 2 ;;
-    4) echo -e "\nOpción [4] — FUNCIONES ESPECIALES\nEn desarrollo..."; sleep 2 ;;
-    5) echo -e "\nOpción [5] — CONFIGURACION DEL SCRIPT\nEn desarrollo..."; sleep 2 ;;
-    6) echo -e "\nOpción [6] — ACTUALIZACIONES\nEn desarrollo..."; sleep 2 ;;
-    7) echo -e "\nOpción [7] — DESINSTALAR PANEL\nEn desarrollo..."; sleep 2 ;;
-    8) echo -e "\nCerrando sesión..."; exit 0 ;;
-    9) echo -e "\nReiniciando VPS..."; reboot ;;
-    *) echo -e "\nOpción inválida"; sleep 1.5 ;;
+    0) echo -e "\n${V}Saliendo... ¡Hasta la próxima! ✅${N}"; exit 0 ;;
+    1) echo -e "\n${A}Opción [1] — ${B}ADMINISTRAR CUENTAS${N}\n${M}En desarrollo...${N}"; sleep 2 ;;
+    2) echo -e "\n${A}Opción [2] — ${B}CONFIGURACIÓN DE PROTOCOLOS${N}\n${V}Lista para configurar puertos y túneles ✅${N}"; sleep 2 ;;
+    3) echo -e "\n${A}Opción [3] — ${B}HERRAMIENTAS EXTRAS${N}\n${M}En desarrollo...${N}"; sleep 2 ;;
+    4) echo -e "\n${A}Opción [4] — ${B}FUNCIONES ESPECIALES${N}\n${M}En desarrollo...${N}"; sleep 2 ;;
+    5) echo -e "\n${A}Opción [5] — ${B}CONFIGURACIÓN DEL SCRIPT${N}\n${M}En desarrollo...${N}"; sleep 2 ;;
+    6) echo -e "\n${A}Opción [6] — ${B}ACTUALIZACIONES${N}\n${M}En desarrollo...${N}"; sleep 2 ;;
+    7) echo -e "\n${R}Opción [7] — ⚠️ DESINSTALAR PANEL${N}\n${M}En desarrollo...${N}"; sleep 2 ;;
+    8) echo -e "\n${Az}Cerrando sesión...${N}"; exit 0 ;;
+    9) echo -e "\n${R}⚠️ Reiniciando VPS...${N}"; reboot ;;
+    *) echo -e "\n${R}❌ Opción inválida. Intentá nuevamente${N}"; sleep 1.5 ;;
   esac
 done
