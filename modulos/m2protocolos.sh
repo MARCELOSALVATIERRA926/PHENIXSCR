@@ -50,15 +50,24 @@ ${C}═════════════════════════�
   ${V}DROPBEAR:${N} 90                  ${V}PYTHON3:${N} 80
   ${V}SSH:${N}   22
 ${C}══════════════════════════════════════════════════════════════${N}
-  ${A}[01]${N}  AJUSTES SSH        $(estado $ESTADO_SSH)   ${A}[10]${N}  SQUID               $(estado $ESTADO_SQUID)
-  ${A}[02]${N}  DROPBEAR           $(estado $ESTADO_DROPBEAR) ${A}[11]${N}  OPENVPN             $(estado $ESTADO_OPENVPN)
-  ${A}[03]${N}  SOCKS PYTHON       $(estado $ESTADO_SOCKS)    ${A}[12]${N}  CHECKUSER ONLINE    $(estado $ESTADO_CHECKUSER)
-  ${A}[04]${N}  STUNNEL (SSL)      $(estado $ESTADO_STUNNEL)  ${A}[13]${N}  ATKEN and HASH      $(estado $ESTADO_ATKEN)
-  ${A}[05]${N}  SLOWDNS            $(estado $ESTADO_SLOWDNS)  ${A}[14]${N}  FILEBROWSER         $(estado $ESTADO_FILEBROWSER)
-  ${A}[06]${N}  WS-EPRO            $(estado $ESTADO_WSEPRO)   ${A}[15]${N}  V2RAY/XRAY          $(estado $ESTADO_V2RAY)
-  ${A}[07]${N}  UDP-CUSTOM         $(estado $ESTADO_UDPCUSTOM) ${A}[16]${N}  SSHGO               $(estado $ESTADO_SSHGO)
-  ${A}[08]${N}  UDP-HYSTERIA       $(estado $ESTADO_UDPHYSTERIA) ${A}[17]${N}  WIREGUARD           $(estado $ESTADO_WIREGUARD)
-  ${A}[09]${N}  BADVPN-UDPGW       $(estado $ESTADO_BADVPN)   ${A}[18]${N}  HCRM                $(estado $ESTADO_HCRM)
+  ${A}[01]${N}  AJUSTES SSH        $(estado $ESTADO_SSH)   
+  ${A}[02]${N}  DROPBEAR           $(estado $ESTADO_DROPBEAR)   
+  ${A}[03]${N}  SOCKS PYTHON       $(estado $ESTADO_SOCKS)    
+  ${A}[04]${N}  STUNNEL (SSL)      $(estado $ESTADO_STUNNEL)  
+  ${A}[05]${N}  SLOWDNS            $(estado $ESTADO_SLOWDNS)  
+  ${A}[06]${N}  WS-EPRO            $(estado $ESTADO_WSEPRO)  
+  ${A}[07]${N}  UDP-CUSTOM         $(estado $ESTADO_UDPCUSTOM)
+  ${A}[08]${N}  UDP-HYSTERIA       $(estado $ESTADO_UDPHYSTERIA) 
+  ${A}[09]${N}  BADVPN-UDPGW       $(estado $ESTADO_BADVPN)   
+  ${A}[10]${N}  SQUID              $(estado $ESTADO_SQUID)
+  ${A}[11]${N}  OPENVPN            $(estado $ESTADO_OPENVPN)
+  ${A}[12]${N}  CHECKUSER ONLINE   $(estado $ESTADO_CHECKUSER)
+  ${A}[13]${N}  ATKEN and HASH     $(estado $ESTADO_ATKEN)
+  ${A}[14]${N}  FILEBROWSER        $(estado $ESTADO_FILEBROWSER)
+  ${A}[15]${N}  V2RAY/XRAY         $(estado $ESTADO_V2RAY)
+  ${A}[16]${N}  SSHGO              $(estado $ESTADO_SSHGO)
+  ${A}[17]${N}  WIREGUARD          $(estado $ESTADO_WIREGUARD)
+  ${A}[18]${N}  HCRM               $(estado $ESTADO_HCRM)
 ${C}══════════════════════════════════════════════════════════════${N}
   ${V}[00]${N}  Volver al menú principal
 ${C}══════════════════════════════════════════════════════════════${N}
